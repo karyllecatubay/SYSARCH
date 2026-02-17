@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CCS | Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <i class="fa-solid fa-desktop nav-icon"></i>
+      College of Computer Studies Sit-in Monitoring System
+    </div>
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle" id="communityToggle">
+          Community <i class="fa-solid fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu" id="communityMenu">
+          <li><a href="#">Announcements</a></li>
+          <li><a href="#">Forum</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+      </li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="login.html" class="nav-link">Login</a></li>
+      <li><a href="register.html" class="nav-link btn-register">Register</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-body">
+    <div class="hero-section">
+      <h1 class="hero-title">Sit-in Monitoring System</h1>
+      <p class="hero-desc">
+        Welcome to the CCS Sit-in Monitoring System.<br>
+        This platform allows students to log and manage their sit-in sessions
+        in the computer laboratory. Track your remaining sessions, view
+        announcements, and stay up to date with lab availability.
+      </p>
+      <div class="hero-buttons">
+        <a href="register.html" class="hero-btn-primary">Get Started</a>
+      </div>
+    </div>
+  </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

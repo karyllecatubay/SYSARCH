@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CCS | Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <title>CCS | Sit-in Monitoring System</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 </head>
 <body>
@@ -13,45 +13,223 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar-brand">
-      <i class="fa-solid fa-desktop nav-icon"></i>
-      College of Computer Studies Sit-in Monitoring System
+      <img src="images/ccslogo.png" alt="Logo" class="nav-logo">
+      <span>Sit-in Monitoring System <br/><span style="font-size:.75rem;font-weight:600;opacity:.55">University of Cebu — College of Computer Studies</span></span>
     </div>
-    <ul class="navbar-links" id="navLinks">
+
+    <ul class="navbar-center" id="navCenter">
       <li><a href="index.html" class="nav-link active">Home</a></li>
-      <li class="dropdown">
-        <a href="#" class="nav-link dropdown-toggle" id="communityToggle">
-          Community <i class="fa-solid fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu" id="communityMenu">
-          <li><a href="#">Announcements</a></li>
-          <li><a href="#">Forum</a></li>
-          <li><a href="#">Resources</a></li>
-        </ul>
-      </li>
+     <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle" id="communityToggle">
+            Community <i class="fa-solid fa-caret-down" style="font-size:.72rem"></i>
+          </a>
+          <ul class="dropdown-menu" id="communityMenu">
+            <li><a href="#">Announcements</a></li>
+            <li><a href="#">Forum</a></li>
+            <li><a href="#">Resources</a></li>
+          </ul>
+        </li>
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="login.html" class="nav-link">Login</a></li>
-      <li><a href="register.html" class="nav-link btn-register">Register</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+
+    <div class="navbar-right">
+      <a href="register.html" class="btn-nav-cta">Register Now</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
+  <!-- PAGE BODY -->
   <div class="page-body">
-    <div class="hero-section">
-      <h1 class="hero-title">Sit-in Monitoring System</h1>
-      <p class="hero-desc">
-        Welcome to the CCS Sit-in Monitoring System.<br>
-        This platform allows students to log and manage their sit-in sessions
-        in the computer laboratory. Track your remaining sessions, view
-        announcements, and stay up to date with lab availability.
-      </p>
-      <div class="hero-buttons">
-        <a href="register.html" class="hero-btn-primary">Get Started</a>
+
+    <!-- HERO BANNER -->
+    <div class="hero-banner">
+
+      <!-- LEFT: title, description, CTA, socials -->
+      <div class="hero-left">
+        <div class="hero-top">
+          <h1 class="hero-title">
+            Sit-in Monitoring System
+          </h1>
+          <p class="hero-desc">
+            College of Computer Studies
+          </p>
+          <p class="hero-desc-small">
+            Log sessions, track computer lab availability, manage sit-ins, and monitor remaining sessions — all in one platform built for the College of Computer Studies.
+          </p>
+        </div>
+
+        <div class="hero-bottom">
+          <a href="register.html" class="btn-hero-outline">
+            Get Started
+              <i class="fa-solid fa-arrow-right" style="margin-left:2px;font-size:.6rem"></i>
+          </a>
+          <div class="hero-social">
+            <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: tilted dashboard screens -->
+      <div class="hero-right">
+        <div class="screens-wrap">
+
+          <!-- Back screen (tilted right) -->
+          <div class="screen-back">
+            <div class="back-item">
+              <div class="back-icon"><i class="fa-solid fa-users"></i></div>
+              <div>
+                <div class="back-info-title">Students Active</div>
+                <div class="back-info-sub">32 currently in labs</div>
+              </div>
+            </div>
+            <div class="back-item">
+              <div class="back-icon"><i class="fa-solid fa-desktop"></i></div>
+              <div>
+                <div class="back-info-title">Computers Free</div>
+                <div class="back-info-sub">16 available now</div>
+              </div>
+            </div>
+            <div class="back-item">
+              <div class="back-icon"><i class="fa-solid fa-bell"></i></div>
+              <div>
+                <div class="back-info-title">New Announcement</div>
+                <div class="back-info-sub">Lab 3 closing at 5pm</div>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <!-- Front screen (tilted left) -->
+          <div class="screen-front">
+            <div class="screen-topbar">
+              <div class="sdots">
+                <span class="sdot r"></span>
+                <span class="sdot y"></span>
+                <span class="sdot g"></span>
+              </div>
+              <span class="screen-title-sm">
+                <img src="images/ccslogo.png"  alt="Logo" class="nav-logo">
+                <img src="images/uclogo(2).png"  alt="Logo" class="nav-logo">
+                </span>
+              <span class="screen-title-sm">Dashboard</span>
+              <span class="screen-live">LIVE</span>
+            </div>
+                <span class="screen-title-sm"><h2>Welcome Student!</h2></span>
+                <br>
+            <div class="s-stat-row">
+              <div class="s-stat">
+                <div class="s-stat-n">32</div>
+                <div class="s-stat-l">Active</div>
+              </div>
+              <div class="s-stat">
+                <div class="s-stat-n">16</div>
+                <div class="s-stat-l">Free</div>
+              </div>
+            </div>
+            <div class="s-bars">
+              <div class="s-bar-row">
+                <span class="s-bar-lbl">BSIT</span>
+                <div class="s-bar-track">
+                  <div class="s-bar-fill" style="width:78%;background:linear-gradient(90deg,#6c3fcf,#f5c518)"></div>
+                </div>
+                <span class="s-bar-val">78%</span>
+              </div>
+              <div class="s-bar-row">
+                <span class="s-bar-lbl">BSCS</span>
+                <div class="s-bar-track">
+                  <div class="s-bar-fill" style="width:55%;background:linear-gradient(90deg,#a259f7,#c084fc)"></div>
+                </div>
+                <span class="s-bar-val">55%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
-  </footer>
+    <!-- /hero-banner -->
+
+    <!-- WHITE CONTENT SECTION -->
+    <div class="section-white" id="about">
+      <div class="section-top-row">
+        <div>
+          <div class="section-eyebrow">✦ Platform Features</div>
+          <h2 class="section-title">Everything You<br/><span>Need</span></h2>
+          <p class="section-sub">A complete solution for students and administrators of the College of Computer Studies.</p>
+        </div>
+        <a href="register.html" class="btn-section-cta">
+          <i class="fa-solid fa-rocket"></i> Get Started
+        </a>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-calendar-check" style="color:#6c3fcf"></i></div>
+          <h3>Session Tracking</h3>
+          <p>Monitor your sit-in sessions in real time and track remaining session counts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-bell" style="color:#a259f7"></i></div>
+          <h3>Announcements</h3>
+          <p>Stay updated with lab schedules, closures, and important CCS notices instantly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-chart-bar" style="color:#f5c518"></i></div>
+          <h3>Usage Reports</h3>
+          <p>Admins access detailed lab usage stats, peak hours, and per-course breakdowns.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-shield-halved" style="color:#6c3fcf"></i></div>
+          <h3>Secure Access</h3>
+          <p>Protected student accounts with authenticated logins. Your data stays private.</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-number" data-target="1200">0</div>
+          <div class="stat-label">Students Enrolled</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="48">0</div>
+          <div class="stat-label">Lab Computers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="320">0</div>
+          <div class="stat-label">Sessions This Month</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="99">0<span class="stat-suffix">%</span></div>
+          <div class="stat-label">Uptime</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-brand">
+        <img src="images/uclogo.png" alt="Logo" class="nav-logo">
+        CCS Sit-in Monitoring System
+      </div>
+      <div class="footer-copy">© 2026 University of Cebu — College of Computer Studies</div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact
+
+            </a>
+      </div>
+    </footer>
+
+  </div><!-- /page-body -->
 
   <script src="script.js"></script>
 </body>

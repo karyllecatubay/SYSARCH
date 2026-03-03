@@ -6,21 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ─── HAMBURGER MENU ─── */
   const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('navLinks');
+  const navCenter = document.getElementById('navCenter');
 
-  if (hamburger && navLinks) {
+  if (hamburger && navCenter) {
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      const isOpen = navLinks.classList.contains('open');
-      hamburger.setAttribute('aria-expanded', isOpen);
+      navCenter.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', navCenter.classList.contains('open'));
     });
 
-    // Close menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    navCenter.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navCenter.classList.remove('open'));
     });
   }
-
 
   /* ─── COMMUNITY DROPDOWN ─── */
   const communityToggle = document.getElementById('communityToggle');
@@ -32,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
       communityMenu.classList.toggle('show');
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!communityToggle.contains(e.target) && !communityMenu.contains(e.target)) {
         communityMenu.classList.remove('show');
@@ -40,30 +36,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-  /* ─── COUNTER ANIMATION (Hero Stats) ─── */
+  /* ─── COUNTER ANIMATION ─── */
   const counters = document.querySelectorAll('.stat-number[data-target]');
 
   if (counters.length) {
     const animateCounter = (el) => {
-      const target   = parseInt(el.dataset.target, 10);
-      const duration = 1400;
-      const step     = 16;
+      const target    = parseInt(el.dataset.target, 10);
+      const suffix    = el.querySelector('.stat-suffix');
+      const duration  = 1400;
+      const step      = 16;
       const increment = target / (duration / step);
       let current = 0;
 
       const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-          el.textContent = target;
+          el.firstChild.textContent = target;
           clearInterval(timer);
         } else {
-          el.textContent = Math.floor(current);
+          el.firstChild.textContent = Math.floor(current);
         }
       }, step);
     };
 
-    // Use IntersectionObserver so counters animate when visible
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -76,50 +71,57 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => observer.observe(counter));
   }
 
+  /* ─── FEATURE CARD SCROLL REVEAL ─── */
+  const featureCards = document.querySelectorAll('.feature-card');
 
-  /* ─── SCROLL REVEAL (Feature Cards) ─── */
-  const revealEls = document.querySelectorAll('.feature-card');
-
-  if (revealEls.length) {
+  if (featureCards.length) {
     const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.style.opacity    = '1';
-            entry.target.style.transform  = 'translateY(0)';
-          }, i * 80);
+          entry.target.classList.add('revealed');
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
-    revealEls.forEach(el => {
-      el.style.opacity   = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity .5s ease, transform .5s ease';
-      revealObserver.observe(el);
+    featureCards.forEach((card, i) => {
+      card.style.opacity    = '0';
+      card.style.transform  = 'translateY(18px)';
+      card.style.transition = `opacity .5s ease ${i * 80}ms, transform .5s ease ${i * 80}ms`;
+
+      revealObserver.observe(card);
     });
-  }
 
+    // Handle .revealed state via JS (avoids needing extra CSS class)
+    const revealHandler = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity   = '1';
+          entry.target.style.transform = 'translateY(0)';
+          revealHandler.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    featureCards.forEach(card => revealHandler.observe(card));
+  }
 
   /* ─── PASSWORD TOGGLE ─── */
   document.querySelectorAll('.toggle-pw').forEach(btn => {
     btn.addEventListener('click', () => {
-      const targetId = btn.dataset.target;
-      const input    = document.getElementById(targetId);
+      const input = document.getElementById(btn.dataset.target);
       if (!input) return;
 
       const isHidden = input.type === 'password';
-      input.type     = isHidden ? 'text' : 'password';
+      input.type = isHidden ? 'text' : 'password';
 
       const icon = btn.querySelector('i');
       if (icon) {
-        icon.classList.toggle('fa-eye',        !isHidden);
-        icon.classList.toggle('fa-eye-slash',   isHidden);
+        icon.classList.toggle('fa-eye',       !isHidden);
+        icon.classList.toggle('fa-eye-slash',  isHidden);
       }
     });
   });
-
 
   /* ─── REGISTER FORM VALIDATION ─── */
   const registerForm = document.getElementById('registerForm');
@@ -129,25 +131,39 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       if (validateRegisterForm()) {
         showToast('Registration successful! Welcome to CCS Monitoring.', 'success');
-        // Simulate redirect after success
         setTimeout(() => { window.location.href = 'index.html'; }, 2200);
       }
     });
 
-    // Real-time validation on blur
     registerForm.querySelectorAll('input, select').forEach(input => {
-      input.addEventListener('blur', () => validateField(input));
+      input.addEventListener('blur',  () => validateField(input));
       input.addEventListener('input', () => {
         if (input.classList.contains('error')) validateField(input);
       });
     });
   }
 
-  /**
-   * Validate a single field.
-   * @param {HTMLInputElement|HTMLSelectElement} field
-   * @returns {boolean}
-   */
+  /* ─── LOGIN FORM VALIDATION ─── */
+  const loginForm = document.getElementById('loginForm');
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (validateLoginForm()) {
+        showToast('Login successful! Redirecting…', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+      }
+    });
+
+    loginForm.querySelectorAll('input').forEach(input => {
+      input.addEventListener('blur',  () => validateField(input));
+      input.addEventListener('input', () => {
+        if (input.classList.contains('error')) validateField(input);
+      });
+    });
+  }
+
+  /* ─── FIELD VALIDATION ─── */
   function validateField(field) {
     const { id, value, required } = field;
     const trimmed = value.trim();
@@ -158,23 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       switch (id) {
         case 'idNumber':
-          if (trimmed && !/^\d{4}-\d{5}$/.test(trimmed))
+          if (trimmed && !/^\d{8}$/.test(trimmed))
             errorMsg = 'Format: 12345678';
           break;
-        case 'courseLevel':
-          if (trimmed) {
-            const n = parseInt(trimmed, 10);
-            if (isNaN(n) || n < 1 || n > 4)
-              errorMsg = 'Course level must be 1–4.';
-          }
+        case 'courseLevel': {
+          const n = parseInt(trimmed, 10);
+          if (trimmed && (isNaN(n) || n < 1 || n > 4))
+            errorMsg = 'Must be 1–4.';
           break;
+        }
         case 'email':
           if (trimmed && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed))
             errorMsg = 'Enter a valid email address.';
           break;
         case 'password':
           if (trimmed && trimmed.length < 8)
-            errorMsg = 'Password must be at least 8 characters.';
+            errorMsg = 'Minimum 8 characters.';
           break;
         case 'repeatPassword': {
           const pw = document.getElementById('password');
@@ -187,41 +202,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const errorEl = document.getElementById(`${id}Error`);
     if (errorEl) errorEl.textContent = errorMsg;
-
-    if (errorMsg) {
-      field.classList.add('error');
-    } else {
-      field.classList.remove('error');
-    }
+    field.classList.toggle('error', !!errorMsg);
 
     return !errorMsg;
   }
 
-  /**
-   * Run validation on all required register fields.
-   * @returns {boolean}
-   */
   function validateRegisterForm() {
-    const fields = ['idNumber','lastName','firstName','courseLevel','email','password','repeatPassword'];
-    let allValid = true;
-
-    fields.forEach(id => {
+    const fields = ['idNumber', 'lastName', 'firstName', 'courseLevel', 'email', 'password', 'repeatPassword'];
+    return fields.reduce((allValid, id) => {
       const field = document.getElementById(id);
-      if (field && !validateField(field)) allValid = false;
-    });
-
-    return allValid;
+      return field ? (validateField(field) && allValid) : allValid;
+    }, true);
   }
 
+  function validateLoginForm() {
+    const fields = ['loginId', 'loginPassword'];
+    return fields.reduce((allValid, id) => {
+      const field = document.getElementById(id);
+      return field ? (validateField(field) && allValid) : allValid;
+    }, true);
+  }
 
   /* ─── TOAST NOTIFICATION ─── */
-  /**
-   * Show a toast message.
-   * @param {string} message
-   * @param {'success'|'error'} type
-   */
   function showToast(message, type = 'success') {
-    // Remove existing toast
     const existing = document.querySelector('.toast');
     if (existing) existing.remove();
 
@@ -241,16 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
+  /* ─── ACTIVE NAV LINK ─── */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
-  /* ─── SMOOTH ACTIVE NAV LINK ─── */
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-
-  document.querySelectorAll('.navbar-links .nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && href.includes(currentPath)) {
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (href && href.includes(currentPage)) {
       link.classList.add('active');
-    } else {
-      link.classList.remove('active');
     }
   });
 

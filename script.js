@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (counters.length) {
     const animateCounter = (el) => {
       const target    = parseInt(el.dataset.target, 10);
-      const suffix    = el.querySelector('.stat-suffix');
       const duration  = 1400;
       const step      = 16;
       const increment = target / (duration / step);
@@ -75,24 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const featureCards = document.querySelectorAll('.feature-card');
 
   if (featureCards.length) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
     featureCards.forEach((card, i) => {
       card.style.opacity    = '0';
       card.style.transform  = 'translateY(18px)';
       card.style.transition = `opacity .5s ease ${i * 80}ms, transform .5s ease ${i * 80}ms`;
-
-      revealObserver.observe(card);
     });
 
-    // Handle .revealed state via JS (avoids needing extra CSS class)
     const revealHandler = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -123,15 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ─── REGISTER FORM VALIDATION ─── */
+  /* ─── REGISTER FORM → PHP ─── */
   const registerForm = document.getElementById('registerForm');
 
   if (registerForm) {
-    registerForm.addEventListener('submit', (e) => {
+    registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (validateRegisterForm()) {
-        showToast('Registration successful! Welcome to CCS Monitoring.', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+      e.stopPropagation();
+      if (!validateRegisterForm()) return;
+
+      const formData = new FormData(registerForm);
+      try {
+        const res  = await fetch('register_process.php', { method: 'POST', body: formData });
+        const data = await res.json();
+        showToast(data.message, data.success ? 'success' : 'error');
+        if (data.success) {
+          setTimeout(() => { window.location.href = 'dashboard.php'; }, 2200);
+        }
+      } catch (err) {
+        showToast('Server error. Make sure XAMPP is running.', 'error');
       }
     });
 
@@ -143,15 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─── LOGIN FORM VALIDATION ─── */
+  /* ─── LOGIN FORM → PHP ─── */
   const loginForm = document.getElementById('loginForm');
 
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (validateLoginForm()) {
-        showToast('Login successful! Redirecting…', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+      e.stopPropagation();
+      if (!validateLoginForm()) return;
+
+      const formData = new FormData(loginForm);
+      try {
+        const res  = await fetch('login_process.php', { method: 'POST', body: formData });
+        const data = await res.json();
+        showToast(data.message, data.success ? 'success' : 'error');
+        if (data.success) {
+          setTimeout(() => { window.location.href = 'dashboard.php'; }, 2200);
+        }
+      } catch (err) {
+        showToast('Server error. Make sure XAMPP is running.', 'error');
       }
     });
 
@@ -245,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ─── ACTIVE NAV LINK ─── */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPage = window.location.pathname.split('/').pop() || 'index.php';
 
   document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href') || '';

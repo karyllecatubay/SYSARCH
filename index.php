@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +20,7 @@
     </div>
 
     <ul class="navbar-center" id="navCenter">
-      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="index.php" class="nav-link active">Home</a></li>
      <li class="dropdown">
           <a href="#" class="nav-link dropdown-toggle" id="communityToggle">
             Community <i class="fa-solid fa-caret-down" style="font-size:.72rem"></i>
@@ -30,11 +32,11 @@
           </ul>
         </li>
       <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="login.html" class="nav-link">Login</a></li>
+      <li><a href="login.php" class="nav-link">Login</a></li>
     </ul>
 
     <div class="navbar-right">
-      <a href="register.html" class="btn-nav-cta">Register Now</a>
+      <a href="register.php" class="btn-nav-cta">Register Now</a>
     </div>
 
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -63,7 +65,7 @@
         </div>
 
         <div class="hero-bottom">
-          <a href="register.html" class="btn-hero-outline">
+          <a href="register.php" class="btn-hero-outline">
             Get Started
               <i class="fa-solid fa-arrow-right" style="margin-left:2px;font-size:.6rem"></i>
           </a>
@@ -164,7 +166,7 @@
           <h2 class="section-title">Everything You<br/><span>Need</span></h2>
           <p class="section-sub">A complete solution for students and administrators of the College of Computer Studies.</p>
         </div>
-        <a href="register.html" class="btn-section-cta">
+        <a href="register.php" class="btn-section-cta">
           <i class="fa-solid fa-rocket"></i> Get Started
         </a>
       </div>

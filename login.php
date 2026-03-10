@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
   <section class="auth-section">
     <div class="auth-card login-card">
 
-      <a href="index.html" class="btn-back">
+      <a href="index.php" class="btn-back">
         <i class="fa-solid fa-arrow-left"></i> Back
       </a>
 
@@ -65,7 +67,7 @@
         <div class="auth-divider">or</div>
 
         <p class="auth-switch">
-          Don't have an account? <a href="register.html">Register here</a>
+          Don't have an account? <a href="register.php">Register here</a>
         </p>
 
       </form>

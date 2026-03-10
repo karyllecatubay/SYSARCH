@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
   <section class="auth-section">
     <div class="auth-card register-card">
 
-      <a href="index.html" class="btn-back">
+      <a href="index.php" class="btn-back">
         <i class="fa-solid fa-arrow-left"></i> Back
       </a>
 
@@ -24,7 +26,7 @@
           <h2 class="auth-title">Create Account</h2>
           <p class="auth-subtitle">Join the CCS Sit-in Monitoring System to get started.</p>
 
-          <form id="registerForm" class="auth-form" novalidate>
+          <form id="registerForm" class="auth-form" novalidate onsubmit="return false;">
 
             <div class="form-row two-col">
               <div class="form-group">
@@ -105,7 +107,7 @@
             </button>
 
             <p class="auth-switch">
-              Already have an account? <a href="login.html">Sign in here</a>
+              Already have an account? <a href="login.php">Sign in here</a>
             </p>
 
           </form>

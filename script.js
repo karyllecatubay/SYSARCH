@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         showToast(data.message, data.success ? 'success' : 'error');
         if (data.success) {
-          setTimeout(() => { window.location.href = 'dashboard.php'; }, 2200);
+          setTimeout(() => { window.location.href = data.role === 'admin' ? 'admin.php' : 'dashboard.php'; }, 2200);
         }
       } catch (err) {
         showToast('Server error. Make sure XAMPP is running.', 'error');
@@ -150,8 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!validateLoginForm()) return;
 
       const formData = new FormData(loginForm);
+      formData.append('_action', 'login');
       try {
-        const res  = await fetch('login_process.php', { method: 'POST', body: formData });
+        const res  = await fetch('dashboard.php', { method: 'POST', body: formData });
         const data = await res.json();
         showToast(data.message, data.success ? 'success' : 'error');
         if (data.success) {

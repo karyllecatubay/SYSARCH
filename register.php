@@ -62,8 +62,23 @@
               <div class="form-group">
                 <label for="course">Course</label>
                 <select id="course" name="course" required>
-                  <option value="BSIT">BSIT</option>
-                  <option value="BSCS">BSCS</option>
+                  <option value="BSIT">Bachelor of Science in Information Technology (BSIT)</option>
+                  <option value="BSCS">Bachelor of Science in Computer Science (BSCS)</option>
+                  <option value="BSCE">Bachelor of Science in Civil Engineering (BSCE)</option>
+                  <option value="BSME">Bachelor of Science in Mechanical Engineering (BSME)</option>
+                  <option value="BSEE">Bachelor of Science in Electrical Engineering (BSEE)</option>
+                  <option value="BSECE">Bachelor of Science in Electronics Engineering (BSECE)</option>
+                  <option value="BSIE">Bachelor of Science in Industrial Engineering (BSIE)</option>
+                  <option value="BEEd">Bachelor of Elementary Education (BEEd)</option>
+                  <option value="BSEd">Bachelor of Secondary Education (BSEd)</option>
+                  <option value="BSCrim">Bachelor of Science in Criminology (BSCrim)</option>
+                  <option value="BSA">Bachelor of Science in Accountancy (BSA)</option>
+                  <option value="BSBA">Bachelor of Science in Business Administration (BSBA)</option>
+                  <option value="BSHRM">Bachelor of Science in Hotel and Restaurant Management (BSHRM)</option>
+                  <option value="BSCA">Bachelor of Science in Customs Administration (BSCA)</option>
+                  <option value="BSOA">Bachelor of Science in Office Administration (BSOA)</option>
+                  <option value="BSSW">Bachelor of Science in Social Work (BSSW)</option>
+                  <option value="AB Political Science">Bachelor of Arts in Political Science (AB Political Science)</option>
                 </select>
                 <span class="form-error" id="courseError"></span>
               </div>

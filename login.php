@@ -33,7 +33,7 @@
             type="text"
             id="loginId"
             name="loginId"
-            placeholder="e.g. 1234-56789"
+            placeholder="e.g. 123456789"
             required
             autocomplete="username"
           />

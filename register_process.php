@@ -66,6 +66,9 @@ $stmt->execute([
 ]);
 
 // Auto login after register
+session_regenerate_id(true);
+unset($_SESSION['admin_logged_in'], $_SESSION['admin_name']);
+$_SESSION['role']         = 'student';
 $_SESSION['student_id']   = $pdo->lastInsertId();
 $_SESSION['student_name'] = $first_name . ' ' . $last_name;
 $_SESSION['id_number']    = $id_number;

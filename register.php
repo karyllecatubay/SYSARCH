@@ -28,19 +28,14 @@
 
           <form id="registerForm" class="auth-form" novalidate onsubmit="return false;">
 
-            <div class="form-row two-col">
-              <div class="form-group">
-                <label for="idNumber">ID Number</label>
-                <input type="text" id="idNumber" name="idNumber" placeholder="e.g. 12345678" required/>
-                <span class="form-error" id="idNumberError"></span>
-              </div>
-              <div class="form-group">
-                <label for="courseLevel">Year Level</label>
-                <input type="number" id="courseLevel" name="courseLevel" placeholder="1–4" min="1" max="4" value="1" required/>
-                <span class="form-error" id="courseLevelError"></span>
-              </div>
+            <!-- Row 1: ID Number -->
+            <div class="form-group">
+              <label for="idNumber">ID Number</label>
+              <input type="text" id="idNumber" name="idNumber" placeholder="e.g. 12345678" required/>
+              <span class="form-error" id="idNumberError"></span>
             </div>
 
+            <!-- Row 2: Last / First / Middle -->
             <div class="form-row three-col">
               <div class="form-group">
                 <label for="lastName">Last Name</label>
@@ -58,6 +53,7 @@
               </div>
             </div>
 
+            <!-- Row 3: Course + Year Level -->
             <div class="form-row two-col">
               <div class="form-group">
                 <label for="course">Course</label>
@@ -83,17 +79,26 @@
                 <span class="form-error" id="courseError"></span>
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="you@email.com" required/>
-                <span class="form-error" id="emailError"></span>
+                <label for="courseLevel">Year Level</label>
+                <input type="number" id="courseLevel" name="courseLevel" placeholder="1–4" min="1" max="4" value="1" required/>
+                <span class="form-error" id="courseLevelError"></span>
               </div>
             </div>
 
+            <!-- Row 4: Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required/>
+              <span class="form-error" id="emailError"></span>
+            </div>
+
+            <!-- Row 5: Address -->
             <div class="form-group">
               <label for="address">Address</label>
               <input type="text" id="address" name="address" placeholder="Street, Barangay, City"/>
             </div>
 
+            <!-- Row 6: Password + Repeat Password -->
             <div class="form-row two-col">
               <div class="form-group">
                 <label for="password">Password</label>
@@ -131,6 +136,37 @@
 
     </div>
   </section>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="reg-success-overlay" id="regSuccessOverlay">
+    <div class="reg-success-card" id="regSuccessCard">
+      <div class="reg-success-icon">
+        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="30" cy="30" r="30" fill="url(#sg)"/>
+          <path class="check-path" d="M17 30.5 L25.5 39 L43 21" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <defs>
+            <linearGradient id="sg" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6c3fcf"/>
+              <stop offset="1" stop-color="#a259f7"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2 class="reg-success-title">You're all set!</h2>
+      <p class="reg-success-name" id="regSuccessName"></p>
+      <p class="reg-success-msg">Your account has been created successfully. Please sign in with your credentials to continue.</p>
+      <div class="reg-success-id-wrap">
+        <span class="reg-success-id-label">Your ID Number</span>
+        <span class="reg-success-id" id="regSuccessId"></span>
+      </div>
+      <div class="reg-success-progress">
+        <div class="reg-success-bar" id="regSuccessBar"></div>
+      </div>
+      <a href="login.php" class="btn btn-primary reg-success-btn">
+        <i class="fa-solid fa-right-to-bracket"></i> Go to Login
+      </a>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

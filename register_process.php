@@ -1,4 +1,5 @@
 <?php
+ob_start();   
 session_start();
 require 'db.php';
 header('Content-Type: application/json');
@@ -65,14 +66,12 @@ $stmt->execute([
     $course, $year_level, $email, $address, $hashed
 ]);
 
-// Auto login after register
-session_regenerate_id(true);
-unset($_SESSION['admin_logged_in'], $_SESSION['admin_name']);
-$_SESSION['role']         = 'student';
-$_SESSION['student_id']   = $pdo->lastInsertId();
-$_SESSION['student_name'] = $first_name . ' ' . $last_name;
-$_SESSION['id_number']    = $id_number;
-$_SESSION['course']       = $course;
-
-echo json_encode(['success' => true, 'message' => 'Account created! Redirecting…']);
+// Registration successful — do NOT auto-login, send user to login page
+echo json_encode([
+    'success'    => true,
+    'registered' => true,
+    'name'       => $first_name,
+    'id_number'  => $id_number,
+    'message'    => 'Account created successfully!'
+]);
 ?>
